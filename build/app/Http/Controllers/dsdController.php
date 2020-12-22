@@ -6,10 +6,10 @@ use App\Model\lvl1_data;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 
-class kmcontroller extends Controller
+class dsdController extends Controller
 {
     public function data(){
-        $data = lvl1_data::where('lvl1_id' , 3)->get();
+        $data = lvl1_data::where('lvl1_id' , 4)->get();
         return DataTables::of($data)->toJson();
     }
 
@@ -20,7 +20,7 @@ class kmcontroller extends Controller
         $create->value = $request->value_input;
         $create->satuan = $request->satuan_input;
         $create->tahun = $request->tahun_input;
-        $create->lvl1_id = 3;
+        $create->lvl1_id = 4;
         $create->save();
 
     }

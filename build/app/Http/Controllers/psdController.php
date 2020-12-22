@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\lvl1_data;
-use Yajra\DataTables\DataTables;
+use App\Model\lvl2_data;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
-class kmcontroller extends Controller
+class psdController extends Controller
 {
-    public function data(){
-        $data = lvl1_data::where('lvl1_id' , 3)->get();
+    public function dataKp(){
+        $data = lvl2_data::where('lvl2_id' , 13)->get();
         return DataTables::of($data)->toJson();
     }
 
     public function create(Request $request){
 
-        $create = new lvl1_data();
+        $create = new lvl2_data();
         $create->data = $request->data_input;
         $create->value = $request->value_input;
         $create->satuan = $request->satuan_input;
         $create->tahun = $request->tahun_input;
-        $create->lvl1_id = 3;
+        $create->lvl2_id = 13;
         $create->save();
 
     }
@@ -28,7 +28,7 @@ class kmcontroller extends Controller
 
     public function update(Request $request,$id){
 
-        $update = lvl1_data::where('id',$id)->first();
+        $update = lvl2_data::where('id',$id)->first();
         $update->data = $request->data_input;
         $update->value = $request->value_input;
         $update->satuan = $request->satuan_input;
@@ -39,7 +39,7 @@ class kmcontroller extends Controller
 
     public function delete($id){
 
-        lvl1_data::where('id', $id)->delete();
+        lvl2_data::where('id', $id)->delete();
 
     }
 }

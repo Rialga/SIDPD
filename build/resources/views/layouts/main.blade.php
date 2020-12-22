@@ -22,17 +22,18 @@
 <body>
 <div class="app">
     <div class="layout">
-        @guest
-            @yield('content')
-        @else
+
             <div class="header">
+                @auth
                 <div class="logo logo-dark mt-2">
-                    <a href="{{ url('dashboard') }}">
+                    <a href="{{ url('/statistik/km') }}">
                         <img src="{{ asset('assets/image/logo-t.png') }}" alt="Logo">
                         <img class="logo-fold ml-3" src="{{ asset('assets/image/logo-t.png') }}" alt="Logo">
                     </a>
                 </div>
+                @endauth
                 <div class="nav-wrap">
+                    @auth
                     <ul class="nav-left">
                         <li class="desktop-toggle">
                             <a href="javascript:void(0);">
@@ -45,12 +46,22 @@
                             </a>
                         </li>
                     </ul>
+                    @endauth
+                    @guest
+                    <ul class="nav-left">
+
+                    </ul>
+                    <ul class="nav-right">
+                        <a class="btn btn-default mr-4" href="{{url('login') }}">Login</a>
+                    </ul>
+                    @else
                     <ul class="nav-right">
                         <li class="dropdown dropdown-animated scale-left">
                             <div class="pointer" data-toggle="dropdown">
                                 <div class="avatar avatar-image  m-h-10 m-r-15">
                                     <img src="{{ asset('assets/image/logo-t.png') }}"  alt="">
                                 </div>
+                                <span class="mr-4"> {{ Auth::user()->name }} <i class="anticon font-size-10 anticon-down"></i> </span>
                             </div>
                             <div class="p-b-15 p-t-20 dropdown-menu pop-profile">
                                 <div class="p-h-20 p-b-15 m-b-10 border-bottom">
@@ -80,9 +91,11 @@
                             </div>
                         </li>
                     </ul>
+                    @endguest
                 </div>
             </div>
 
+            @auth
             <div class="side-nav">
                 @yield('side-bar')
             </div>
@@ -101,7 +114,35 @@
                     </div>
                 </footer>
             </div>
-        @endguest
+            @endauth
+
+            @guest
+
+                <div class="main-content d-flex justify-content-center mt-5">
+                    <div class="container-fluid p-h-0 p-v-40 bg full-height d-flex justify-content-center" >
+                            <div class="container d-flex justify-content-center">
+                                <div class="row align-items-center w-100">
+                                    <div class="justify-content-center col-md-12 col-lg-12 ">
+
+                                        @yield('content')
+
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <div class="footer-content">
+                        <p ></p>.</p>
+                        <span>
+                            <p class="m-b-0">Copyright © 2020 SIDPD.</p>
+                        </span>
+                    </div>
+                </footer>
+            @endguest
+
     </div>
 </div>
 
